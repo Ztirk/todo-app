@@ -1,5 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Background from './components/Background.vue'
+import Todo from './components/Todo.vue'
+</script>
 
 <template>
-  <div class="text-red-400">hello</div>
+  <Background><Todo /></Background>
 </template>
