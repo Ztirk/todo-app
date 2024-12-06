@@ -15,8 +15,10 @@ function greet(event) {
 <script>
 export default {
   props: {
-    name: String,
     id: Number,
+    item_name: String,
+    id_done: Boolean,
+    idx: Number,
   },
 }
 </script>
@@ -26,7 +28,7 @@ export default {
     label="Create a new todo..."
     class="font-normal text-[500px]"
     variant="outlined"
-    :model-value="name"
+    :model-value="item_name"
     single-line
     ><div class="border border-[#E3E4F1] h-[24px] aspect-square rounded-full" @click="greet" />
   </v-text-field>

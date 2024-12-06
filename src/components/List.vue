@@ -22,13 +22,23 @@ async function fetchTodo() {
   }
 }
 fetchTodo()
+
+function onEnd() {
+  console.log(1)
+}
+function onStart() {
+  console.log(2)
+}
+function onUpdate() {
+  console.log(3)
+}
 </script>
 
 <template>
   <VueDraggable
     ref="el"
-    v-model="list"
-    :disabled="disabled"
+    v-model="post"
+    :disabled="false"
     :animation="150"
     ghostClass="ghost"
     @start="onStart"
@@ -36,9 +46,13 @@ fetchTodo()
     @end="onEnd"
     class="flex flex-col gap-0"
   >
-    <Input v-for="item in list" :key="item.id" :name="item.name">
-      {{ item.name }}
-    </Input>
+    <Input
+      v-for="(item, index) in post"
+      :key="item.id"
+      :item_name="item.item_name"
+      :is_done="item.is_done"
+      :idx="item.idx"
+    />
   </VueDraggable>
-  <preview-list :list="list" />
+  <preview-list :list="post" />
 </template>
