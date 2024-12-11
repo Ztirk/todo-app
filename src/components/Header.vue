@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import sun from '../assets/todo-app-main/images/icon-sun.svg'
 </script>
 

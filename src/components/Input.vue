@@ -1,5 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const count = ref(0)
 
@@ -12,10 +13,10 @@ function greet(event) {
 }
 </script>
 
-<script>
+<script lang="ts">
 export default {
   props: {
-    id: Number,
+    id: String,
     item_name: String,
     id_done: Boolean,
     idx: Number,
@@ -24,14 +25,25 @@ export default {
 </script>
 
 <template>
-  <v-text-field
-    label="Create a new todo..."
-    class="font-normal text-[500px]"
-    variant="outlined"
-    :model-value="item_name"
-    single-line
-    ><div class="border border-[#E3E4F1] h-[24px] aspect-square rounded-full" @click="greet" />
-  </v-text-field>
+  <div class="flex">
+    <v-text-field
+      label="Create a new todo..."
+      class="font-normal text-[500px]"
+      variant="outlined"
+      :model-value="item_name"
+      single-line
+      :id="id"
+      ><div
+        v-if="!id_done"
+        class="border border-[#E3E4F1] h-[24px] aspect-square rounded-full"
+        @click="greet"
+      />
+      <img v-else src="../assets/todo-app-main-images/icon-check.svg" />
+    </v-text-field>
+    <div class="bg-[#ffffff] flex justify-center place-items-center w-10 border border-[#979797]">
+      <font-awesome-icon :icon="['fas', 'bars']" />
+    </div>
+  </div>
 </template>
 
 <style>
