@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import Header from './Header.vue'
 import Input from './Input.vue'
-import List from './List.vue'
 import Footer from './Footer.vue'
 
 import getTodo from '@/apis/getTodo'
-import { TodoList } from '@/interfaces/interface'
+import { TodoList, UpdateTodoItemName } from '@/interfaces/interface'
 import { ref } from 'vue'
 import { SortableEvent, type UseDraggableReturn, VueDraggable } from 'vue-draggable-plus'
+import updateTodoItemName from '@/apis/updateTodoItemName'
 
 const loading = ref(false)
 const todoList = ref<TodoList[]>([])
@@ -32,19 +32,38 @@ fetchTodo()
 
 const el = ref<UseDraggableReturn>()
 
-const onStart = (e: SortableEvent) => {
+const onDragStart = (e: SortableEvent) => {
   console.log('start', e)
 }
 
-const onEnd = (e: SortableEvent) => {
+const onDragEnd = (e: SortableEvent) => {
   console.log('onEnd', e)
 }
 
-const onUpdate = (e: SortableEvent, todoList: TodoList[]) => {
+const onDragUpdate = (e: SortableEvent, todoList: TodoList[]) => {
   for (const i in todoList) {
     todoList[i].idx = Number(i)
   }
   console.log(e, todoList)
+}
+
+const onCheck = (idx: number) => {
+  let is_done = todoList.value[idx].is_done
+  is_done = !is_done
+}
+
+const onChange = (e: string, idx: number) => {
+  todoList.value[idx].item_name = e
+}
+
+const onUnFocus = (e: boolean, idx: number) => {
+  if (!e) {
+    const obj: UpdateTodoItemName = {
+      item_name: todoList.value[idx].item_name,
+      id: todoList.value[idx].id,
+    }
+    updateTodoItemName(obj)
+  }
 }
 </script>
 
@@ -58,9 +77,9 @@ const onUpdate = (e: SortableEvent, todoList: TodoList[]) => {
       :disabled="false"
       :animation="150"
       ghostClass="ghost"
-      @start="onStart"
-      @update="(e: SortableEvent) => onUpdate(e, todoList)"
-      @end="onEnd"
+      @start="onDragStart"
+      @update="(e: SortableEvent) => onDragUpdate(e, todoList)"
+      @end="onDragEnd"
       class="flex flex-col gap-0"
     >
       <Input
@@ -70,6 +89,8 @@ const onUpdate = (e: SortableEvent, todoList: TodoList[]) => {
         :item_name="item.item_name"
         :is_done="item.is_done"
         :idx="item.idx"
+        @on-change="onChange"
+        @on-un-focus="onUnFocus"
       />
     </VueDraggable>
     <preview-list :list="todoList" />

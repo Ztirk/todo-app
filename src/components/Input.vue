@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { ref } from 'vue'
 
-const count = ref(0)
+defineEmits(['onChange', 'onUnFocus'])
 
-function greet(event) {
-  alert(`Hello ${name.value}!`)
-  // `event` is the native DOM event
-  if (event) {
-    alert(event.target.tagName)
-  }
-}
+const textField = ref(null)
 </script>
 
 <script lang="ts">
@@ -27,20 +21,21 @@ export default {
 <template>
   <div class="flex">
     <v-text-field
+      ref="textField"
       label="Create a new todo..."
       class="font-normal text-[500px]"
       variant="outlined"
       :model-value="item_name"
       single-line
       :id="id"
-      ><div
-        v-if="!id_done"
-        class="border border-[#E3E4F1] h-[24px] aspect-square rounded-full"
-        @click="greet"
-      />
+      @update:model-value="(e) => $emit('onChange', e, idx)"
+      @update:focused="(e) => $emit('onUnFocus', e, idx)"
+      ><div v-if="!id_done" class="border border-[#E3E4F1] h-[24px] aspect-square rounded-full" />
       <img v-else src="../assets/todo-app-main-images/icon-check.svg" />
     </v-text-field>
-    <div class="bg-[#ffffff] flex justify-center place-items-center w-10 border border-[#979797]">
+    <div
+      class="bg-[#ffffff] flex justify-center place-items-center w-10 border border-[#979797] rounded-[5px] cursor-pointer"
+    >
       <font-awesome-icon :icon="['fas', 'bars']" />
     </div>
   </div>
