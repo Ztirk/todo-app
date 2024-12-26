@@ -16,6 +16,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
 import { faUserSecret, faBars } from '@fortawesome/free-solid-svg-icons'
 
+import firebaseApp from './functions/firebaseFunc'
+
+firebaseApp
+
 /* add icons to the library */
 library.add(faUserSecret)
 library.add(faBars)

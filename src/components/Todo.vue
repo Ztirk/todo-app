@@ -2,12 +2,14 @@
 import Header from './Header.vue'
 import Input from './Input.vue'
 import Footer from './Footer.vue'
+import Pagination from './Pagination.vue'
 
-import getTodo from '@/apis/getTodo'
+import getTodo from '@/apis/getTodo.ts'
 import { TodoList, UpdateTodoItemName } from '@/interfaces/interface'
 import { ref } from 'vue'
 import { SortableEvent, type UseDraggableReturn, VueDraggable } from 'vue-draggable-plus'
 import updateTodoItemName from '@/apis/updateTodoItemName'
+import updateTodoIsDone from '@/apis/updateTodoIsdone'
 
 const loading = ref(false)
 const todoList = ref<TodoList[]>([])
@@ -47,9 +49,16 @@ const onDragUpdate = (e: SortableEvent, todoList: TodoList[]) => {
   console.log(e, todoList)
 }
 
-const onCheck = (idx: number) => {
-  let is_done = todoList.value[idx].is_done
-  is_done = !is_done
+const onCheck = (e, idx: number) => {
+  const id = todoList.value[idx].id
+  const is_done = !todoList.value[idx].is_done
+
+  todoList.value[idx].is_done = is_done
+
+  updateTodoIsDone({
+    id: id,
+    is_done: is_done,
+  })
 }
 
 const onChange = (e: string, idx: number) => {
@@ -71,6 +80,7 @@ const onUnFocus = (e: boolean, idx: number) => {
   <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px]">
     <Header class="mb-[40px]" />
     <Input class="mb-[24px]" />
+
     <VueDraggable
       ref="el"
       v-model="todoList"
@@ -91,9 +101,13 @@ const onUnFocus = (e: boolean, idx: number) => {
         :idx="item.idx"
         @on-change="onChange"
         @on-un-focus="onUnFocus"
+        @on-check="onCheck"
+        @click.stop
       />
     </VueDraggable>
     <preview-list :list="todoList" />
+    <Pagination :count="todoList.filter((d) => d.is_done).length" />
+
     <Footer class="mt-[49px]" />
   </div>
 </template>

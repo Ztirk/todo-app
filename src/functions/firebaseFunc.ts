@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { getAnalytics } from 'firebase/analytics'
 import firebaseConfig from '@/configs/firebaseConfig'
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check'
 
@@ -9,6 +10,6 @@ const appCheck = initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true, // Set to true to allow auto-refresh.
 })
 
-// const analytics = getAnalytics(app)
+const analytics = getAnalytics(app)
 
 export default app
