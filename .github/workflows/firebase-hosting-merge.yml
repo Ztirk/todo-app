@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: FirebaseExtended/action-hosting-deploy@v0
       - run: |
           echo "VITE_ADD_TODO=${{ secrets.VITE_ADD_TODO }}" >> .env
           echo "VITE_DELETE_TODO=${{ secrets.VITE_DELETE_TODO }}" >> .env
@@ -19,6 +18,7 @@ jobs:
           echo "VITE_UPDATE_INDEX_TODO=${{ secrets.VITE_UPDATE_INDEX_TODO }}" >> .env
           echo "VITE_UPDATE_TODO=${{ secrets.VITE_UPDATE_TODO }}" >> .env
       - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TODO_APP_C7FB8 }}
