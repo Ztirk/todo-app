@@ -12,11 +12,8 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "VITE_ADD_TODO=${{ secrets.VITE_ADD_TODO }}" >> .env
-          echo "VITE_DELETE_TODO=${{ secrets.VITE_DELETE_TODO }}" >> .env
-          echo "VITE_GET_TODO=${{ secrets.VITE_GET_TODO }}" >> .env
-          echo "VITE_UPDATE_INDEX_TODO=${{ secrets.VITE_UPDATE_INDEX_TODO }}" >> .env
-          echo "VITE_UPDATE_TODO=${{ secrets.VITE_UPDATE_TODO }}" >> .env
-
-      - name: Verify .env contents
-        run: cat .env
+          echo "VITE_ADD_TODO=${{ secrets.VITE_ADD_TODO }}" >> dist/.env
+          echo "VITE_DELETE_TODO=${{ secrets.VITE_DELETE_TODO }}" >> dist/.env
+          echo "VITE_GET_TODO=${{ secrets.VITE_GET_TODO }}" >> dist/.env
+          echo "VITE_UPDATE_INDEX_TODO=${{ secrets.VITE_UPDATE_INDEX_TODO }}" >> dist/.env
+          echo "VITE_UPDATE_TODO=${{ secrets.VITE_UPDATE_TODO }}" >> dist/.env
