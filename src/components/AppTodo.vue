@@ -135,17 +135,14 @@ const onClickClear = () => {
 }
 
 const filterTodo = () => {
-  if (todoList.value.length) {
-  }
   if (all.value) {
     return todoList.value
   } else if (active.value) {
-    return todoList.value.filter((obj) => obj.is_done)
-  } else {
     return todoList.value.filter((obj) => !obj.is_done)
+  } else {
+    return todoList.value.filter((obj) => obj.is_done)
   }
 }
-
 </script>
 
 <template>
