@@ -12,6 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
+        run: |
+          echo "VITE_ADD_TODO=${{ secrets.VITE_ADD_TODO }}" >> dist/.env
+          echo "VITE_DELETE_TODO=${{ secrets.VITE_DELETE_TODO }}" >> dist/.env
+          echo "VITE_GET_TODO=${{ secrets.VITE_GET_TODO }}" >> dist/.env
+          echo "VITE_UPDATE_INDEX_TODO=${{ secrets.VITE_UPDATE_INDEX_TODO }}" >> dist/.env
+          echo "VITE_UPDATE_TODO=${{ secrets.VITE_UPDATE_TODO }}" >> dist/.env
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
