@@ -1,15 +1,15 @@
-import { initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
-import firebaseConfig from '@/configs/firebaseConfig'
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check'
+// import { initializeApp } from 'firebase/app'
+// import { getAnalytics } from 'firebase/analytics'
+// import firebaseConfig from '@/configs/firebaseConfig'
+// import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check'
 
-const app = initializeApp(firebaseConfig)
+// const app = initializeApp(firebaseConfig)
 
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPCHA),
-  isTokenAutoRefreshEnabled: true, // Set to true to allow auto-refresh.
-})
+// const appCheck = initializeAppCheck(app, {
+//   provider: new ReCaptchaEnterpriseProvider(import.meta.env.VITE_RECAPCHA),
+//   isTokenAutoRefreshEnabled: true, // Set to true to allow auto-refresh.
+// })
 
-const analytics = getAnalytics(app)
+// const analytics = getAnalytics(app)
 
-export default app
+// export default app
