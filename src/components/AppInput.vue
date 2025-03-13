@@ -2,14 +2,22 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref } from 'vue'
 import iconCheck from '../assets/todo-app-main/images/icon-check.svg'
+import iconCross from '../assets/todo-app-main/images/icon-cross.svg'
 import { id_ID } from '@faker-js/faker/.'
 
-defineEmits(['onChange', 'onUnFocus', 'onCheck'])
+defineEmits(['onUnFocus', 'onCheck', 'onDelete', 'onAddTodo'])
 
-const textField = ref(null)
+// const textField = ref(null)
 
-const func = () => {
-  alert('helo')
+// const func = () => {
+//   alert('helo')
+// }
+
+const onDragStart = (e: DragEvent) => {
+  const offsetX = e.offsetX
+  const offsetWidth = (e.target as HTMLDivElement).offsetWidth
+
+  if (offsetX < offsetWidth - 30) e.stopPropagation()
 }
 </script>
 
@@ -26,10 +34,10 @@ export default {
 
 <template>
   <div
-    class="flex border-[#979797] border bg-white"
-    :class="idx == 0 ? 'rounded-t-[5px] ' : idx == undefined ? '' : ''"
+    :class="`bg-white dark:bg-[#25273D] flex border-[#979797] border rounded-[5px]`"
+    @dragstart="onDragStart"
   >
-    <div class="h-[64px] flex px-[24px] items-center">
+    <div class="h-[64px] flex px-[24px] items-center" draggable="false">
       <div
         v-if="is_done == false"
         class="h-[24px] aspect-square rounded-full cursor-pointer border-[#E3E4F1] border hover:border-[#C058F3]"
@@ -40,19 +48,16 @@ export default {
         class="bg-gradient-to-br from-[#55DDFF] to-[#C058F3] h-[24px] aspect-square rounded-full flex items-center justify-center cursor-pointer"
         @click.stop
       >
-        <img
-          src="../assets/todo-app-main/images/icon-check.svg"
-          @click.stop="(e) => $emit('onCheck', e, idx)"
-        />
+        <img :src="iconCheck" @click.stop="(e) => $emit('onCheck', idx)" />
       </div>
     </div>
     <input
       placeholder="Create a new todo..."
-      class="w-full"
+      :class="`w-full dark:text-[#C8CBE7] ${is_done ? 'line-through text-[#D1D2DA] dark:text-[#4D5067]' : ''}`"
       @click.stop
       :value="item_name"
-      @change="(e) => $emit('onChange', e, idx)"
-      @focusin="(e) => $emit('onUnFocus', e, idx)"
+      @focusout="(e) => $emit('onUnFocus', e, idx)"
+      @keydown="(e) => $emit('onAddTodo', e)"
     />
     <!-- <v-text-field
       ref="textField"
@@ -69,6 +74,9 @@ export default {
     >
     </v-text-field> -->
 
+    <div class="flex justify-center place-items-center w-10 cursor-pointer" v-if="id">
+      <img :src="iconCross" @click="() => $emit('onDelete', id, idx)" />
+    </div>
     <div class="flex justify-center place-items-center w-10 cursor-pointer" v-if="id">
       <font-awesome-icon :icon="['fas', 'bars']" />
     </div>

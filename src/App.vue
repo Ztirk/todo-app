@@ -1,10 +1,10 @@
 <script setup>
-import Background from './components/Background.vue'
-import Todo from '@/components/Todo.vue'
+import AppBackground from './components/AppBackground.vue'
+import AppTodo from '@/components/AppTodo.vue'
 </script>
 
 <template>
-  <Background><Todo /></Background>
+  <AppBackground><AppTodo /></AppBackground>
 </template>
 
 <style>

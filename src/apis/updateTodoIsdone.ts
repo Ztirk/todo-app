@@ -3,12 +3,9 @@ import { UpdateTodoIsDone } from '@/interfaces/interface'
 
 export default async function updateTodoIsDone(obj: UpdateTodoIsDone) {
   try {
-    const res = await axiosInterceptors.put(
-      'https://updatetodo-7ftcfvpbga-uc.a.run.app/' + obj.id,
-      {
-        is_done: obj.is_done,
-      },
-    )
+    const res = await axiosInterceptors.put(import.meta.env.VITE_UPDATE_TODO + '/' + obj.id, {
+      is_done: obj.is_done,
+    })
     const data = res.data
 
     return data
