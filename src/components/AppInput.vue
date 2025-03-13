@@ -39,11 +39,11 @@ export default {
   >
     <div class="h-[64px] flex px-[24px] items-center" draggable="false">
       <div
-        :class="`h-[24px] aspect-square rounded-full cursor-pointer border-[#E3E4F1] border hover:border-[#C058F3] ${!is_done ? 'hidden' : ''}`"
+        :class="`h-[24px] aspect-square rounded-full cursor-pointer border-[#E3E4F1] border hover:border-[#C058F3] ${is_done ? 'hidden' : ''}`"
         @click.stop="$emit('onCheck', idx)"
       />
       <div
-        :class="`bg-gradient-to-br from-[#55DDFF] to-[#C058F3] h-[24px] aspect-square rounded-full flex items-center justify-center cursor-pointer ${is_done ? 'hidden' : ''}`"
+        :class="`bg-gradient-to-br from-[#55DDFF] to-[#C058F3] h-[24px] aspect-square rounded-full flex items-center justify-center cursor-pointer ${!is_done ? 'hidden' : ''}`"
         @click.stop
       >
         <img :src="iconCheck" @click.stop="(e) => $emit('onCheck', idx)" />
@@ -51,7 +51,7 @@ export default {
     </div>
     <input
       placeholder="Create a new todo..."
-      :class="`w-full dark:text-[#C8CBE7] ${is_done ? 'line-through text-[#D1D2DA] dark:text-[#4D5067]' : ''}`"
+      :class="`w-full ${is_done ? 'line-through text-[#D1D2DA]' : ''}`"
       @click.stop
       :value="item_name"
       @focusout="(e) => $emit('onUnFocus', e, idx)"
