@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-        run: |
+      - run: |
           echo "VITE_ADD_TODO=${{ secrets.VITE_ADD_TODO }}" >> dist/.env
           echo "VITE_DELETE_TODO=${{ secrets.VITE_DELETE_TODO }}" >> dist/.env
           echo "VITE_GET_TODO=${{ secrets.VITE_GET_TODO }}" >> dist/.env
