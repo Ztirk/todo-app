@@ -1,0 +1,22 @@
+name: Create .env File
+
+on: [push, workflow_dispatch]
+
+jobs:
+  create-env:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create .env file
+        run: |
+          echo "VITE_ADD_TODO=${{ secrets.VITE_ADD_TODO }}" >> .env
+          echo "VITE_DELETE_TODO=${{ secrets.VITE_DELETE_TODO }}" >> .env
+          echo "VITE_GET_TODO=${{ secrets.VITE_GET_TODO }}" >> .env
+          echo "VITE_UPDATE_INDEX_TODO=${{ secrets.VITE_UPDATE_INDEX_TODO }}" >> .env
+          echo "VITE_UPDATE_TODO=${{ secrets.VITE_UPDATE_TODO }}" >> .env
+
+      - name: Verify .env contents
+        run: cat .env
