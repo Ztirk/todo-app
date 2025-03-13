@@ -41,7 +41,7 @@ export default {
       <div
         v-if="is_done == false"
         class="h-[24px] aspect-square rounded-full cursor-pointer border-[#E3E4F1] border hover:border-[#C058F3]"
-        @click.stop="(e) => $emit('onCheck', e, idx)"
+        @click.stop="$emit('onCheck', idx)"
       />
       <div
         v-else

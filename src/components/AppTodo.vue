@@ -146,9 +146,6 @@ const filterTodo = () => {
   }
 }
 
-// const countTodo = () => {
-//   return todoList.value.filter((d) => !d.is_done).length
-// }
 </script>
 
 <template>
@@ -183,7 +180,7 @@ const filterTodo = () => {
     </VueDraggable>
     <preview-list :list="todoList" />
     <AppPagination
-      :count="5"
+      :count="todoList.filter((d) => !d.is_done).length"
       :highlight="all ? 'all' : active ? 'active' : completed ? 'completed' : ''"
       @on-click-all="onClickAll"
       @on-click-active="onClickActive"
