@@ -39,13 +39,11 @@ export default {
   >
     <div class="h-[64px] flex px-[24px] items-center" draggable="false">
       <div
-        v-if="is_done == false"
-        class="h-[24px] aspect-square rounded-full cursor-pointer border-[#E3E4F1] border hover:border-[#C058F3]"
+        :class="`h-[24px] aspect-square rounded-full cursor-pointer border-[#E3E4F1] border hover:border-[#C058F3] ${!is_done ? 'hidden' : ''}`"
         @click.stop="$emit('onCheck', idx)"
       />
       <div
-        v-else
-        class="bg-gradient-to-br from-[#55DDFF] to-[#C058F3] h-[24px] aspect-square rounded-full flex items-center justify-center cursor-pointer"
+        :class="`bg-gradient-to-br from-[#55DDFF] to-[#C058F3] h-[24px] aspect-square rounded-full flex items-center justify-center cursor-pointer ${is_done ? 'hidden' : ''}`"
         @click.stop
       >
         <img :src="iconCheck" @click.stop="(e) => $emit('onCheck', idx)" />
