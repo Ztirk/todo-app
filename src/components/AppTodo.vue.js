@@ -111,6 +111,8 @@ const onClickClear = () => {
     }
 };
 const filterTodo = () => {
+    if (todoList.value.length) {
+    }
     if (all.value) {
         return todoList.value;
     }
@@ -209,8 +211,8 @@ function __VLS_template() {
     // @ts-ignore
     [AppPagination,];
     // @ts-ignore
-    const __VLS_38 = __VLS_asFunctionalComponent(AppPagination, new AppPagination({ ...{ 'onOnClickAll': {} }, ...{ 'onOnClickActive': {} }, ...{ 'onOnClickCompleted': {} }, ...{ 'onOnClickClear': {} }, count: ((__VLS_ctx.todoList.filter((d) => !d.is_done).length)), highlight: ((__VLS_ctx.all ? 'all' : __VLS_ctx.active ? 'active' : __VLS_ctx.completed ? 'completed' : '')), }));
-    const __VLS_39 = __VLS_38({ ...{ 'onOnClickAll': {} }, ...{ 'onOnClickActive': {} }, ...{ 'onOnClickCompleted': {} }, ...{ 'onOnClickClear': {} }, count: ((__VLS_ctx.todoList.filter((d) => !d.is_done).length)), highlight: ((__VLS_ctx.all ? 'all' : __VLS_ctx.active ? 'active' : __VLS_ctx.completed ? 'completed' : '')), }, ...__VLS_functionalComponentArgsRest(__VLS_38));
+    const __VLS_38 = __VLS_asFunctionalComponent(AppPagination, new AppPagination({ ...{ 'onOnClickAll': {} }, ...{ 'onOnClickActive': {} }, ...{ 'onOnClickCompleted': {} }, ...{ 'onOnClickClear': {} }, count: ((5)), highlight: ((__VLS_ctx.all ? 'all' : __VLS_ctx.active ? 'active' : __VLS_ctx.completed ? 'completed' : '')), }));
+    const __VLS_39 = __VLS_38({ ...{ 'onOnClickAll': {} }, ...{ 'onOnClickActive': {} }, ...{ 'onOnClickCompleted': {} }, ...{ 'onOnClickClear': {} }, count: ((5)), highlight: ((__VLS_ctx.all ? 'all' : __VLS_ctx.active ? 'active' : __VLS_ctx.completed ? 'completed' : '')), }, ...__VLS_functionalComponentArgsRest(__VLS_38));
     let __VLS_43;
     const __VLS_44 = {
         onOnClickAll: (__VLS_ctx.onClickAll)
